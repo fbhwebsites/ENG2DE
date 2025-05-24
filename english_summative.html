@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home Page</title>
+    </head>
+    <body>
+        <div class="spotlight-overlay"></div>
+        <div class="center-orb"></div>
+        <header>
+            <div class="logo">MENTAL HELP</div>
+            <nav>
+                <a href="english_summative.html">Home</a>
+                <a href="forum.html">Forum</a>
+                <a href="goals.html">Goals</a>
+                <a href="journal.html">Journal</a>
+                <div class="nav-dropdown">
+                    <a href="#" class="more-link">More <span class="dropdown-arrow">&#9662;</span></a>
+                    <div class="dropdown-content">
+                        <a href="importance.html">Importance</a>
+                        <a href="resource.html">Resources</a>
+                        <a href="affirmations.html">Affirmations</a>
+                        <a href="bulletin.html">Bulletin</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <h1>MENTAL HELP</h1>
+            <p class="subtitle">For those who need it, you are not alone.</p>
+            <a href="forum.html" class="cta-btn">Get Started</a>
+        </main>
+        <section class="testimonials-section">
+            <h2 class="testimonials-title">What People Are Saying</h2>
+            <div class="testimonials-list">
+                <div class="testimonial-card">
+                    <img class="testimonial-photo" src="testimonial_photo/benyang.png" alt="Testimonial Photo">
+                    <div class="testimonial-stars">
+                        <span class="star-svg">★</span><span class="star-svg">★</span><span class="star-svg">★</span><span class="star-svg">★</span><span class="star-svg">★</span>
+                    </div>
+                    <div class="testimonial-text">After the pandemic, I was left feeling anxious and depressed. I didn't know where to turn. Mental Help helped me find a community of people my age who understands me and my struggles. I'm so grateful for this website.</div>
+                    <div class="testimonial-name">— Benyang, Age 16</div>
+                </div>
+                <div class="testimonial-card">
+                    <img class="testimonial-photo" src="testimonial_photo/etienne.jpg" alt="Testimonial Photo">
+                    <div class="testimonial-stars">
+                        <span class="star-svg">★</span><span class="star-svg">★</span><span class="star-svg">★</span><span class="star-svg">★</span><span class="star-svg">★</span>
+                    </div>
+                    <div class="testimonial-text">I've been using Mental Help for a few months now, and it's been more than I can ask for. It helped me take back control of my social life, and at the same time, help me realize how far I've come. I'm so glad I found this website.</div>
+                    <div class="testimonial-name">— Jessica, Age 13</div>
+                </div>
+                <div class="testimonial-card">
+                    <img class="testimonial-photo" src="testimonial_photo/crystal.png" alt="Testimonial Photo">
+                    <div class="testimonial-stars">
+                        <span class="star-svg">★</span><span class="star-svg">★</span><span class="star-svg">★</span><span class="star-svg">★</span><span class="star-svg half">★</span>
+                    </div>
+                    <div class="testimonial-text">I really love the diverse community on this website. I've made so many friends using the forum, and I've learned so much from them. For once, I feel like I'm not alone in this struggle.</div>
+                    <div class="testimonial-name">— Crystal, Age 17</div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            &copy; 2025 Mental Help. All rights reserved.
+        </footer>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background: #000;
+                color: #fff;
+                font-family: 'Segoe UI', Arial, sans-serif;
+                min-height: 100vh;
+                overflow-x: hidden;
+            }
+            header {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 32px 40px 0 40px;
+                box-sizing: border-box;
+            }
+            .logo {
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+                font-weight: 400;
+            }
+            nav {
+                display: flex;
+                gap: 40px;
+                align-items: center;
+            }
+            nav a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 1.2rem;
+                font-weight: 400;
+                transition: color 0.2s;
+            }
+            nav a:hover {
+                color: #6ee7b7;
+            }
+            .nav-dropdown {
+                position: relative;
+                display: inline-block;
+                height: 100%;
+            }
+            .more-link {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+            }
+            .dropdown-arrow {
+                font-size: 0.8em;
+                margin-left: 6px;
+                transition: transform 0.2s;
+                display: inline-block;
+            }
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                right: 0;
+                left: auto;
+                top: 100%;
+                min-width: 160px;
+                background: #181f2a;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+                border-radius: 10px;
+                z-index: 10;
+                flex-direction: column;
+                padding: 10px 0;
+                pointer-events: auto;
+                margin-top: -2px;
+            }
+            .dropdown-content a {
+                color: #fff;
+                padding: 12px 24px;
+                text-decoration: none;
+                display: block;
+                font-size: 1.1rem;
+                transition: background 0.2s, color 0.2s;
+                border-radius: 6px;
+            }
+            .dropdown-content a:hover {
+                background: #6ee7b7;
+                color: #181f2a;
+            }
+            .nav-dropdown:hover .dropdown-content,
+            .nav-dropdown:focus-within .dropdown-content {
+                display: flex;
+            }
+            .nav-dropdown:hover .dropdown-arrow {
+                transform: rotate(180deg);
+            }
+            main {
+                min-height: 70vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                margin-top: 60px;
+            }
+            h1 {
+                font-size: 4rem;
+                letter-spacing: 0.25em;
+                font-weight: 300;
+                margin-bottom: 24px;
+            }
+            .subtitle {
+                color: #b0b7be;
+                font-size: 1.4rem;
+                max-width: 600px;
+                margin-bottom: 48px;
+            }
+            .cta-btn {
+                background: #fff;
+                color: #000;
+                padding: 18px 44px;
+                border-radius: 32px;
+                font-size: 1.2rem;
+                font-weight: 500;
+                text-decoration: none;
+                box-shadow: 0 4px 24px rgba(59, 130, 246, 0.10);
+                transition: background 0.2s, color 0.2s, transform 0.2s;
+                display: inline-block;
+            }
+            .cta-btn:hover {
+                background: #6ee7b7;
+                color: #000;
+                transform: translateY(-2px) scale(1.04);
+            }
+            footer {
+                width: 100%;
+                text-align: center;
+                color: #b0b7be;
+                font-size: 1rem;
+                padding: 40px 0 20px 0;
+                position: relative;
+                bottom: 0;
+                left: 0;
+                background: none;
+            }
+            .cursor-circle {
+                position: fixed;
+                pointer-events: none;
+                border-radius: 50%;
+                width: 24px;
+                height: 24px;
+                background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(180,180,180,0.4) 60%, transparent 100%);
+                mix-blend-mode: lighten;
+                z-index: 9999;
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+                animation: cursor-fade 0.7s forwards;
+            }
+            @keyframes cursor-fade {
+                0% {
+                    opacity: 0.8;
+                    transform: translate(-50%, -50%) scale(1);
+                }
+                80% {
+                    opacity: 0.5;
+                    transform: translate(-50%, -50%) scale(1.3);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(1.7);
+                }
+            }
+            @media (max-width: 700px) {
+                header, main {
+                    padding-left: 16px;
+                    padding-right: 16px;
+                }
+                h1 {
+                    font-size: 2.2rem;
+                }
+                .subtitle {
+                    font-size: 1rem;
+                }
+                nav {
+                    gap: 18px;
+                }
+                .dropdown-content {
+                    min-width: 120px;
+                }
+            }
+            .center-orb {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 420px;
+                height: 420px;
+                border-radius: 50%;
+                background: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.18) 0%, rgba(200,200,200,0.10) 60%, transparent 100%);
+                filter: blur(12px) brightness(1.2);
+                z-index: 0;
+                pointer-events: none;
+                animation: orb-glow 4s ease-in-out infinite alternate;
+            }
+            @keyframes orb-glow {
+                0% { filter: blur(12px) brightness(1.1); }
+                100% { filter: blur(28px) brightness(1.3); }
+            }
+            .spotlight-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                pointer-events: none;
+                z-index: 1;
+                background: radial-gradient(circle at 50% 260px, rgba(255,255,255,0.18) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0.98) 100%);
+                mix-blend-mode: lighten;
+            }
+            header, main, footer {
+                position: relative;
+                z-index: 2;
+            }
+            .testimonials-section {
+                background: #000;
+                padding: 3rem 0 2rem 0;
+                margin-top: 3rem;
+                border-radius: 24px 24px 0 0;
+                box-shadow: 0 -2px 24px rgba(25, 118, 210, 0.04);
+                text-align: center;
+            }
+            .testimonials-title {
+                font-size: 2rem;
+                color: #fff;
+                margin-bottom: 2rem;
+                font-weight: 700;
+                letter-spacing: 0.5px;
+            }
+            .testimonials-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 2.5rem;
+            }
+            .testimonial-card {
+                background: #fff;
+                border-radius: 18px;
+                box-shadow: 0 4px 20px rgba(25, 118, 210, 0.07);
+                padding: 2rem 1.5rem 1.5rem 1.5rem;
+                max-width: 320px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                transition: box-shadow 0.2s, transform 0.2s;
+            }
+            .testimonial-card:hover {
+                box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+                transform: translateY(-4px) scale(1.03);
+            }
+            .testimonial-photo {
+                width: 72px;
+                height: 72px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 1rem;
+                border: 3px solid #eee;
+                box-shadow: 0 2px 8px #eee;
+            }
+            .testimonial-stars {
+                margin-bottom: 0.7rem;
+                font-size: 1.2rem;
+                display: flex;
+                gap: 0.1em;
+            }
+            .star-svg {
+                color: #f7b500;
+                font-size: 1.5em;
+                display: inline-block;
+                filter: none;
+                letter-spacing: -2px;
+            }
+            .star-svg.half {
+                background: linear-gradient(90deg, #f7b500 50%, #fff 50%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .testimonial-text {
+                font-size: 1.08rem;
+                color: #222;
+                margin-bottom: 1rem;
+                font-style: italic;
+                line-height: 1.5;
+            }
+            .testimonial-name {
+                font-size: 1rem;
+                color: #222;
+                font-weight: 600;
+            }
+            @media (max-width: 900px) {
+                .testimonials-list {
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 2rem;
+                }
+            }
+        </style>
+        <style>
+            .chat-widget {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                z-index: 1000;
+            }
+            .chat-button {
+                width: 55px;
+                height: 55px;
+                border-radius: 50%;
+                background: #fff;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                transition: transform 0.2s;
+            }
+            .chat-button:hover {
+                transform: scale(1.05);
+            }
+            .chat-button svg {
+                width: 24px;
+                height: 24px;
+                stroke: #333;
+            }
+            .chat-window {
+                position: fixed;
+                bottom: 85px;
+                right: 30px;
+                width: 320px;
+                height: 450px;
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                display: none;
+                flex-direction: column;
+                overflow: hidden;
+            }
+            .chat-header {
+                background: #fff;
+                color: #333;
+                padding: 15px 20px;
+                font-weight: 600;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid #eee;
+            }
+            .close-chat {
+                background: none;
+                border: none;
+                color: #666;
+                cursor: pointer;
+                font-size: 1.2rem;
+            }
+            .chat-messages {
+                flex: 1;
+                padding: 20px;
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .message {
+                max-width: 80%;
+                padding: 10px 15px;
+                border-radius: 15px;
+                font-size: 0.95rem;
+                line-height: 1.4;
+            }
+            .bot-message {
+                background: #f5f5f5;
+                color: #333;
+                align-self: flex-start;
+                border-bottom-left-radius: 5px;
+            }
+            .user-message {
+                background: #f0f0f0;
+                color: #333;
+                align-self: flex-end;
+                border-bottom-right-radius: 5px;
+            }
+            .chat-input {
+                padding: 15px;
+                border-top: 1px solid #eee;
+                display: flex;
+                gap: 10px;
+                background: #fff;
+            }
+            .chat-input input {
+                flex: 1;
+                padding: 10px 15px;
+                border: 1px solid #eee;
+                border-radius: 20px;
+                outline: none;
+                font-size: 0.95rem;
+                background: #f9f9f9;
+            }
+            .chat-input button {
+                background: #f0f0f0;
+                color: #333;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 20px;
+                cursor: pointer;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            .chat-input button:hover {
+                background: #e5e5e5;
+            }
+        </style>
+        <div class="chat-widget">
+            <button class="chat-button" onclick="toggleChat()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+            </button>
+            <div class="chat-window" id="chatWindow">
+                <div class="chat-header">
+                    <span>Mental Help Assistant</span>
+                    <button class="close-chat" onclick="toggleChat()">×</button>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                        Hi! I'm your Mental Help assistant. How can I help you today? I can guide you through our features like the Forum, Goals, Journal, and more!
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="userInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            // --- Trailing Mouse Effect ---
+            (function() {
+                const trailCount = 8;
+                const trails = [];
+                for (let i = 0; i < trailCount; i++) {
+                    const el = document.createElement('div');
+                    el.className = 'cursor-circle';
+                    el.style.opacity = (0.18 + 0.12 * (trailCount - i)).toFixed(2);
+                    el.style.transition = 'transform 0.18s cubic-bezier(.22,1,.36,1), opacity 0.18s';
+                    document.body.appendChild(el);
+                    trails.push(el);
+                }
+                let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+                const positions = Array(trailCount).fill([mouseX, mouseY]);
+                document.addEventListener('mousemove', function(e) {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+                function animate() {
+                    positions.unshift([mouseX, mouseY]);
+                    positions.length = trailCount;
+                    for (let i = 0; i < trailCount; i++) {
+                        const [x, y] = positions[i];
+                        trails[i].style.transform = `translate(${x - 12}px, ${y - 12}px) scale(${1 - i * 0.07})`;
+                    }
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            })();
+            
+            // Chat functionality
+            function toggleChat() {
+                const chatWindow = document.getElementById('chatWindow');
+                chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+            }
+
+            function handleKeyPress(event) {
+                if (event.key === 'Enter') {
+                    sendMessage();
+                }
+            }
+
+            function sendMessage() {
+                const input = document.getElementById('userInput');
+                const message = input.value.trim();
+                if (message) {
+                    addMessage(message, 'user');
+                    input.value = '';
+                    setTimeout(() => {
+                        const response = getBotResponse(message);
+                        addMessage(response, 'bot');
+                    }, 500);
+                }
+            }
+
+            function addMessage(text, sender) {
+                const messagesDiv = document.getElementById('chatMessages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}-message`;
+                messageDiv.textContent = text;
+                messagesDiv.appendChild(messageDiv);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+
+            function getBotResponse(message) {
+                const lowerMessage = message.toLowerCase();
+                
+                // Feature navigation responses
+                if (lowerMessage.includes('forum') || lowerMessage.includes('community')) {
+                    return "The Forum is a great place to connect with others! You can share your experiences, ask questions, and support others. Click the 'Forum' link in the navigation bar to get started.";
+                }
+                if (lowerMessage.includes('goal') || lowerMessage.includes('track')) {
+                    return "Our Goals feature helps you set and track personal milestones. You can create daily, weekly, or long-term goals and monitor your progress. Find it under the 'Goals' section in the navigation.";
+                }
+                if (lowerMessage.includes('journal') || lowerMessage.includes('write')) {
+                    return "The Journal is your private space to express your thoughts and feelings. It's a great tool for self-reflection and tracking your emotional journey. Access it through the 'Journal' link.";
+                }
+                if (lowerMessage.includes('affirmation') || lowerMessage.includes('positive')) {
+                    return "Our Affirmations feature provides daily positive statements to boost your mood and confidence. You can find it under 'More' in the navigation menu.";
+                }
+                if (lowerMessage.includes('resource') || lowerMessage.includes('help')) {
+                    return "We have various resources available to help you, including articles, guides, and external support links. Check them out under the 'Resources' section in the 'More' menu.";
+                }
+                if (lowerMessage.includes('bulletin') || lowerMessage.includes('news')) {
+                    return "The Bulletin board keeps you updated with the latest news, events, and community announcements. You can find it in the 'More' section of the navigation.";
+                }
+                if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                    return "Hello! I'm here to help you navigate Mental Help. You can ask me about any of our features, including the Forum, Goals, Journal, Affirmations, and more!";
+                }
+                
+                // Default response
+                return "I can help you explore our features! Try asking about the Forum, Goals, Journal, Affirmations, Resources, or Bulletin board. What would you like to know more about?";
+            }
+        </script>
+    </body>
+</html>

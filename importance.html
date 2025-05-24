@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Importance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        body {
+            color: #222;
+            min-height: 100vh;
+        }
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 40px 0 40px;
+            box-sizing: border-box;
+            background: #ffffff;
+        }
+        .logo {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            font-weight: 400;
+            color: #000000;
+        }
+        nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        nav a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #666666;
+        }
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+            height: 100%;
+        }
+        .more-link {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+        }
+        .dropdown-arrow {
+            font-size: 0.8em;
+            margin-left: 6px;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            left: auto;
+            top: 100%;
+            min-width: 160px;
+            background: #ffffff;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            z-index: 10;
+            flex-direction: column;
+            padding: 10px 0;
+            pointer-events: auto;
+            border: 1px solid #e0e0e0;
+        }
+        .dropdown-content a {
+            color: #000000;
+            padding: 12px 24px;
+            text-decoration: none;
+            display: block;
+            font-size: 1.1rem;
+            transition: background 0.2s, color 0.2s;
+            border-radius: 6px;
+        }
+        .dropdown-content a:hover {
+            background: #f5f5f5;
+            color: #000000;
+        }
+        .nav-dropdown:hover .dropdown-content,
+        .nav-dropdown:focus-within .dropdown-content {
+            display: flex;
+        }
+        .nav-dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .importance-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .importance-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+        .importance-header p {
+            color: #666666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .flip-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .flip-card {
+            background: transparent;
+            perspective: 1000px;
+            height: 220px;
+            cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(.4,2,.6,1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        .flip-card-front {
+            background: #fff;
+            color: #222;
+        }
+        .flip-card-back {
+            background: #e0f7fa;
+            color: #00796b;
+            transform: rotateY(180deg);
+        }
+        .flip-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .quiz-section {
+            background: #fffde7;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            margin-bottom: 2rem;
+        }
+        .quiz-section h2 {
+            color: #fbc02d;
+            margin-bottom: 1rem;
+        }
+        .quiz-question {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        .quiz-option {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            transition: background 0.2s, border 0.2s;
+        }
+        .quiz-option.selected {
+            background: #ffe082;
+            border: 1.5px solid #fbc02d;
+        }
+        .quiz-result {
+            margin-top: 1.2rem;
+            font-weight: 500;
+            color: #388e3c;
+        }
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">MENTAL HELP</div>
+        <nav>
+            <a href="english_summative.html">Home</a>
+            <a href="forum.html">Forum</a>
+            <a href="goals.html">Goals</a>
+            <a href="journal.html">Journal</a>
+            <div class="nav-dropdown">
+                <a href="#" class="more-link">More <span class="dropdown-arrow">&#9662;</span></a>
+                <div class="dropdown-content">
+                    <a href="importance.html">Importance</a>
+                    <a href="resource.html">Resources</a>
+                    <a href="affirmations.html">Affirmations</a>
+                    <a href="bulletin.html">Bulletin</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="importance-header">
+            <h1>Mental Health in Youth</h1>
+            <p>A public health crisis since the Covid 19 pandemic.</p>
+        </div>
+        <div class="flip-cards">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span class="material-symbols-outlined flip-icon">psychology</span>
+                        <strong>3 in 4</strong>
+                        <div>Youths reported a worsened mental health during the pandemic.</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <strong>Did you know?</strong>
+                        <div>Early support can make a huge difference in a young person's life. You're not alone!</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span class="material-symbols-outlined flip-icon">trending_up</span>
+                        <strong>50%</strong>
+                        <div>of mental health disorders emerge before 15 years of age.</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <strong>Did you know?</strong>
+                        <div>This statistic rises to 75% by the age of 25.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span class="material-symbols-outlined flip-icon">security</span>                        <strong>Vulnerability</strong>
+                        <div>Youths are more susceptible to psychological distress and mental illness</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <strong>Why?</strong>
+                        <div>Youths are still developing their brains and emotional regulation. Disruptions to this development leads to decreased resilience and increased vulnerability to mental health issues.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span class="material-symbols-outlined flip-icon">groups</span>
+                        <strong>Connection</strong>
+                        <div>Good mental health helps you build strong, positive relationships.</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <strong>Fun Fact:</strong>
+                        <div>Even a short chat with a friend can improve your mental well-being!</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span class="material-symbols-outlined flip-icon">emoji_events</span>
+                        <strong>Resilience</strong>
+                        <div>Mental health helps you bounce back from challenges and setbacks.</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <strong>Try This:</strong>
+                        <div>Write down 3 things you're grateful for today. It boosts resilience!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span class="material-symbols-outlined flip-icon">stress_management</span>                        <strong>Self-Esteem</strong>
+                        <div>Positive mental health fosters self-acceptance and a sense of worth.</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <strong>Try This:</strong>
+                        <div>Practice reciting positive affirmations! Take up gratitude journaling! These go a long way in boosting your self-esteem.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="quiz-section">
+            <h2>Putting Your Knowledge to the Test</h2>
+            <div class="quiz-question" id="quizQuestion">
+                What percentage of mental health issues begin before age 15?
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="selectQuizOption(this, false)">25%</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false)">40%</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, true)">50%</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false)">70%</div>
+            </div>
+            <div class="quiz-result" id="quizResult"></div>
+        </div>
+    </div>
+    <script>
+        const quizQuestions = [
+            {
+                question: "What percentage of mental health issues begin before age 15?",
+                options: [
+                    { text: "25%", correct: false },
+                    { text: "40%", correct: false },
+                    { text: "50%", correct: true },
+                    { text: "70%", correct: false }
+                ],
+                correctMsg: "Correct!"
+            },
+            {
+                question: "Which of these is a good way to support your mental health?",
+                options: [
+                    { text: "Bottling up your feelings", correct: false },
+                    { text: "Talking to someone you trust", correct: true },
+                    { text: "Ignoring your emotions", correct: false },
+                    { text: "Use substances to cope", correct: false }
+                ],
+                correctMsg: "Correct! Talking to someone you trust is a great way to support your mental health."
+            },
+            {
+                question: "True or False: Only adults can experience mental health challenges.",
+                options: [
+                    { text: "True", correct: false },
+                    { text: "False", correct: true }
+                ],
+                correctMsg: "Correct! Mental health challenges can affect anyone, and it's especially prevalent in youth."
+            }
+        ];
+
+        let currentQuiz = 0;
+
+        function renderQuiz() {
+            const q = quizQuestions[currentQuiz];
+            document.getElementById('quizQuestion').textContent = q.question;
+            const optionsDiv = document.querySelector('.quiz-options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                const div = document.createElement('div');
+                div.className = 'quiz-option';
+                div.textContent = opt.text;
+                div.onclick = () => selectQuizOption(div, opt.correct);
+                optionsDiv.appendChild(div);
+            });
+            document.getElementById('quizResult').textContent = '';
+        }
+
+        function selectQuizOption(element, isCorrect) {
+            document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            const result = document.getElementById('quizResult');
+            if (isCorrect) {
+                result.textContent = quizQuestions[currentQuiz].correctMsg;
+                result.style.color = '#388e3c';
+                setTimeout(() => {
+                    currentQuiz++;
+                    if (currentQuiz < quizQuestions.length) {
+                        renderQuiz();
+                    } else {
+                        document.querySelector('.quiz-section').innerHTML = '<h2>Quiz Complete!</h2><div class="quiz-result">Great job!</div>';
+                    }
+                }, 1200);
+            } else {
+                result.textContent = 'Not quite! Try again or flip the cards above for more info.';
+                result.style.color = '#d84315';
+            }
+        }
+
+        // Initialize quiz on page load
+        renderQuiz();
+    </script>
+</body>
+</html>

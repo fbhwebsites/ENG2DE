@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=delete" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: #ffffff;
+            color: #000000;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 40px 0 40px;
+            box-sizing: border-box;
+            background: #ffffff;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            font-weight: 400;
+            color: #000000;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #666666;
+        }
+
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+            height: 100%;
+        }
+
+        .more-link {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8em;
+            margin-left: 6px;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            left: auto;
+            top: 100%;
+            min-width: 160px;
+            background: #ffffff;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            z-index: 10;
+            flex-direction: column;
+            padding: 10px 0;
+            pointer-events: auto;
+            border: 1px solid #e0e0e0;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .dropdown-content a {
+            color: #000000;
+            padding: 12px 24px;
+            text-decoration: none;
+            display: block;
+            font-size: 1.1rem;
+            transition: background 0.2s, color 0.2s;
+            border-radius: 6px;
+        }
+
+        .dropdown-content a:hover {
+            background: #f5f5f5;
+            color: #000000;
+        }
+
+        .nav-dropdown:hover .dropdown-content,
+        .nav-dropdown:focus-within .dropdown-content {
+            display: flex;
+            opacity: 1;
+        }
+
+        .nav-dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .search-bar {
+            background: #ffffff;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            background: #ffffff;
+            color: #000000;
+            font-size: 1rem;
+        }
+
+        .search-bar input::placeholder {
+            color: #999999;
+        }
+
+        .create-discussion {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .create-discussion:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .discussion-form {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: none;
+            border: 1px solid #e0e0e0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .discussion-form.active {
+            display: block;
+        }
+
+        .discussion-form h2 {
+            margin-bottom: 1.5rem;
+            color: #000000;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #000000;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            background: #ffffff;
+            color: #000000;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+
+        .submit-btn {
+            background: #000000;
+            color: #ffffff;
+            border: 1px solid #000000;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .discussions {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .discussion-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            transition: all 0.2s;
+            border: 1px solid #e0e0e0;
+        }
+
+        .discussion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .discussion-title {
+            color: #000000;
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .discussion-meta {
+            color: #666666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .discussion-content {
+            color: #000000;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .discussion-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #666666;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .action-btn:hover {
+            color: #000000;
+        }
+
+        .replies-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .reply-form {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .reply-form.active {
+            display: block;
+        }
+
+        .reply-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .replies-list {
+            margin-top: 1.5rem;
+        }
+
+        .reply-card {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .reply-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .reply-author {
+            font-weight: 500;
+            color: #000000;
+        }
+
+        .reply-time {
+            color: #666666;
+            font-size: 0.8rem;
+        }
+
+        .reply-content {
+            color: #000000;
+            line-height: 1.5;
+        }
+
+        .anonymous-badge {
+            background: #f5f5f5;
+            color: #666666;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            color: #666666;
+            font-size: 1rem;
+            padding: 40px 0 20px 0;
+            margin-top: 4rem;
+            background: #ffffff;
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            transition: color 0.2s;
+        }
+
+        .delete-btn:hover {
+            color: #ff4444;
+        }
+
+        .delete-confirm {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .delete-confirm.active {
+            display: block;
+        }
+
+        .delete-confirm h3 {
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .delete-confirm p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .delete-confirm-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .delete-confirm-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .delete-cancel {
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .delete-confirm-btn.delete {
+            background: #ff4444;
+            color: white;
+        }
+
+        .delete-cancel:hover {
+            background: #e0e0e0;
+        }
+
+        .delete-confirm-btn.delete:hover {
+            background: #ff2222;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .create-discussion {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">MENTAL HELP</div>
+        <nav>
+            <a href="english_summative.html">Home</a>
+            <a href="forum.html">Forum</a>
+            <a href="goals.html">Goals</a>
+            <a href="journal.html">Journal</a>
+            <div class="nav-dropdown">
+                <a href="#" class="more-link">More <span class="dropdown-arrow">&#9662;</span></a>
+                <div class="dropdown-content">
+                    <a href="importance.html">Importance</a>
+                    <a href="resource.html">Resources</a>
+                    <a href="affirmations.html">Affirmations</a>
+                    <a href="bulletin.html">Bulletin</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="Search discussions..." id="searchInput">
+            <!-- <button class="clear-history-btn" onclick="clearForumHistory()" style="margin-top: 10px; padding: 8px 16px; background: #ff4444; color: white; border: none; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                <span class="material-symbols-outlined">delete_forever</span>
+                Clear Forum History
+            </button> -->
+        </div>
+
+        <div class="discussion-form" id="discussionForm">
+            <h2>Create New Discussion</h2>
+            <form onsubmit="createDiscussion(event)">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea id="content" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="anonymous"> Post anonymously
+                    </label>
+                </div>
+                <button type="submit" class="submit-btn">Post Discussion</button>
+            </form>
+        </div>
+
+        <div class="discussions" id="discussionsList">
+            <!-- Sample discussion with replies -->
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <h3 class="discussion-title">Welcome to the Mental Help Forum!</h3>
+                    <button class="delete-btn" onclick="showDeleteConfirm(this, 'discussion')" title="Delete discussion"><span class="material-symbols-outlined">delete</span></button>
+                </div>
+                <div class="discussion-meta">
+                    Posted by <span class="anonymous-badge">Anonymous</span> • 2 hours ago
+                </div>
+                <p class="discussion-content">
+                    In this space, you can freely express yourself without any judgement. Post discussions anonymously, and get advice from peers experiencing the same thing. Please keep all discussions respectful and appropriate. Moderators frequently check the forum for any violations and reserve the right to remove any content.
+                </p>
+                <div class="discussion-actions">
+                    <button class="action-btn" onclick="toggleReplyForm(this)">Reply</button>
+                    <button class="action-btn" onclick="toggleReplies(this)">Show Replies (2)</button>
+                </div>
+                <div class="replies-section" style="display: none;">
+                    <div class="reply-form">
+                        <textarea class="reply-input" placeholder="Write your reply..."></textarea>
+                        <button class="submit-btn" onclick="submitReply(this)">Post Reply</button>
+                    </div>
+                    <div class="replies-list">
+                        <div class="reply-card">
+                            <div class="reply-header">
+                                <span class="reply-author"><span class="anonymous-badge">Anonymous</span></span>
+                                <span class="reply-time">1 hour ago</span>
+                                <button class="delete-btn" onclick="showDeleteConfirm(this, 'reply')" title="Delete reply"><span class="material-symbols-outlined">delete</span></button>
+                            </div>
+                            <p class="reply-content">Glad I stumbled across this community! Can't wait to connect with others.</p>
+                        </div>
+                        <div class="reply-card">
+                            <div class="reply-header">
+                                <span class="reply-author"><span class="anonymous-badge">Anonymous</span></span>
+                                <span class="reply-time">30 minutes ago</span>
+                                <button class="delete-btn" onclick="showDeleteConfirm(this, 'reply')" title="Delete reply"><span class="material-symbols-outlined">delete</span></button>
+                            </div>
+                            <p class="reply-content">Great to be here!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New sample discussions -->
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <h3 class="discussion-title">Regaining Energy and Motivation</h3>
+                    <button class="delete-btn" onclick="showDeleteConfirm(this, 'discussion')" title="Delete discussion"><span class="material-symbols-outlined">delete</span></button>
+                </div>
+                <div class="discussion-meta">
+                    Posted by <span class="anonymous-badge">Anonymous</span> • 1 day ago
+                </div>
+                <p class="discussion-content">
+                    Hey! Every since the pandemic, I found that I have less motivation to do things. I'm not sure why, but I can't even bother to do things I used to love. Anyone experiencing the same thing? If so, got any advice?
+                </p>
+                <div class="discussion-actions">
+                    <button class="action-btn" onclick="toggleReplyForm(this)">Reply</button>
+                    <button class="action-btn" onclick="toggleReplies(this)">Show Replies (3)</button>
+                </div>
+                <div class="replies-section" style="display: none;">
+                    <div class="reply-form">
+                        <textarea class="reply-input" placeholder="Write your reply..."></textarea>
+                        <button class="submit-btn" onclick="submitReply(this)">Post Reply</button>
+                    </div>
+                    <div class="replies-list">
+                        <div class="reply-card">
+                            <div class="reply-header">
+                                <span class="reply-author"><span class="anonymous-badge">Anonymous</span></span>
+                                <span class="reply-time">20 hours ago</span>
+                                <button class="delete-btn" onclick="showDeleteConfirm(this, 'reply')" title="Delete reply"><span class="material-symbols-outlined">delete</span></button>
+                            </div>
+                            <p class="reply-content">You're not alone! Before, I felt the same thing. What helped me regain motivation was by setting small goals for myself.</p>
+                        </div>
+                        <div class="reply-card">
+                            <div class="reply-header">
+                                <span class="reply-author"><span class="anonymous-badge">Anonymous</span></span>
+                                <span class="reply-time">15 hours ago</span>
+                                <button class="delete-btn" onclick="showDeleteConfirm(this, 'reply')" title="Delete reply"><span class="material-symbols-outlined">delete</span></button>
+                            </div>
+                            <p class="reply-content">No way! I thought I was the only one who felt this way. I'm still trying to regain my motivation, but I'm glad to hear I'm not in this alone!</p>
+                        </div>
+                        <div class="reply-card">
+                            <div class="reply-header">
+                                <span class="reply-author"><span class="anonymous-badge">Anonymous</span></span>
+                                <span class="reply-time">5 hours ago</span>
+                                <button class="delete-btn" onclick="showDeleteConfirm(this, 'reply')" title="Delete reply"><span class="material-symbols-outlined">delete</span></button>
+                            </div>
+                            <p class="reply-content">Try and think about the future you're trying to build for yourself and your family. It's hard, but that's what worked for me!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <h3 class="discussion-title">Trying to Cope with Social Media Pressure</h3>
+                    <button class="delete-btn" onclick="showDeleteConfirm(this, 'discussion')" title="Delete discussion"><span class="material-symbols-outlined">delete</span></button>
+                </div>
+                <div class="discussion-meta">
+                    Posted by <span class="anonymous-badge">Anonymous</span> • 2 days ago
+                </div>
+                <p class="discussion-content">
+                    Sometimes, I feel like everyone else is living a perfect life. They've got everything together: perfect grades, a job, friends, and family. Meanwhile, I'm barely passing my classes. How do you all deal with this crushing feeling of inadequacy?
+                </p>
+                <div class="discussion-actions">
+                    <button class="action-btn" onclick="toggleReplyForm(this)">Reply</button>
+                    <button class="action-btn" onclick="toggleReplies(this)">Show Replies (2)</button>
+                </div>
+                <div class="replies-section" style="display: none;">
+                    <div class="reply-form">
+                        <textarea class="reply-input" placeholder="Write your reply..."></textarea>
+                        <button class="submit-btn" onclick="submitReply(this)">Post Reply</button>
+                    </div>
+                    <div class="replies-list">
+                        <div class="reply-card">
+                            <div class="reply-header">
+                                <span class="reply-author"><span class="anonymous-badge">Anonymous</span></span>
+                                <span class="reply-time">1 day ago</span>
+                                <button class="delete-btn" onclick="showDeleteConfirm(this, 'reply')" title="Delete reply"><span class="material-symbols-outlined">delete</span></button>
+                            </div>
+                            <p class="reply-content">Limit your time on social media! It does wonders... I limit myself to at most 30 minutes a day. Trust me, you're enough.</p>
+                        </div>
+                        <div class="reply-card">
+                            <div class="reply-header">
+                                <span class="reply-author"><span class="anonymous-badge">Anonymous</span></span>
+                                <span class="reply-time">12 hours ago</span>
+                                <button class="delete-btn" onclick="showDeleteConfirm(this, 'reply')" title="Delete reply"><span class="material-symbols-outlined">delete</span></button>
+                            </div>
+                            <p class="reply-content">You ever heard, "comparison is the thief of joy"? Avoid focusing on what others are doing, you all have different paths and you'll get there in your own way.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="discussion-card">
+                <div class="discussion-header">
+                    <h3 class="discussion-title">Finding Balance</h3>
+                    <button class="delete-btn" onclick="showDeleteConfirm(this, 'discussion')" title="Delete discussion"><span class="material-symbols-outlined">delete</span></button>
+                </div>
+                <div class="discussion-meta">
+                    Posted by <span class="anonymous-badge">Anonymous</span> • 3 days ago
+                </div>
+                <p class="discussion-content">
+                    I'm really struggling in school and my mental health has only gotten worse. How do you all balance school and your mental health? I'd love to hear your advice and experience. 
+                </p>
+                <div class="discussion-actions">
+                    <button class="action-btn" onclick="toggleReplyForm(this)">Reply</button>
+                    <button class="action-btn" onclick="toggleReplies(this)">Show Replies (1)</button>
+                </div>
+                <div class="replies-section" style="display: none;">
+                    <div class="reply-form">
+                        <textarea class="reply-input" placeholder="Write your reply..."></textarea>
+                        <button class="submit-btn" onclick="submitReply(this)">Post Reply</button>
+                    </div>
+                    <div class="replies-list">
+                        <div class="reply-card">
+                            <div class="reply-header">
+                                <span class="reply-author"><span class="anonymous-badge">Anonymous</span></span>
+                                <span class="reply-time">2 days ago</span>
+                                <button class="delete-btn" onclick="showDeleteConfirm(this, 'reply')" title="Delete reply"><span class="material-symbols-outlined">delete</span></button>
+                            </div>
+                            <p class="reply-content">I'm a super big fan of the Pomodoro Technique. It's basically 25 minutes of work, followed by a 5 minute break, and repeat. I found that it's super good at preventing burnout. Let me know if it works for you!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="create-discussion" onclick="toggleDiscussionForm()">+ New Discussion</button>
+
+    <footer>
+        &copy; 2025 Mental Help. All rights reserved.
+    </footer>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="delete-confirm" id="deleteConfirm">
+        <h3>Delete Confirmation</h3>
+        <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+        <div class="delete-confirm-buttons">
+            <button class="delete-confirm-btn delete-cancel" onclick="cancelDelete()">Cancel</button>
+            <button class="delete-confirm-btn delete" onclick="confirmDelete()">Delete</button>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = 'User' + Math.floor(Math.random() * 1000); // Generate random user ID
+        let currentDeleteItem = null;
+        let currentDeleteType = null;
+
+        // Add user identification to the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user already exists in localStorage
+            const savedUser = localStorage.getItem('forumUser');
+            if (savedUser) {
+                currentUser = savedUser;
+            } else {
+                localStorage.setItem('forumUser', currentUser);
+            }
+            loadDiscussions();
+        });
+
+        function loadDiscussions() {
+            const savedDiscussions = localStorage.getItem('forumDiscussions');
+            if (savedDiscussions) {
+                const discussions = JSON.parse(savedDiscussions);
+                const discussionsList = document.getElementById('discussionsList');
+                discussionsList.innerHTML = ''; // Clear default content
+                
+                discussions.forEach(discussion => {
+                    const discussionCard = createDiscussionCard(discussion);
+                    discussionsList.appendChild(discussionCard);
+                });
+            }
+        }
+
+        function saveDiscussions() {
+            const discussions = [];
+            document.querySelectorAll('.discussion-card').forEach(card => {
+                const discussion = {
+                    title: card.querySelector('.discussion-title').textContent,
+                    content: card.querySelector('.discussion-content').textContent,
+                    author: card.querySelector('.discussion-meta').innerHTML,
+                    timestamp: new Date().toISOString(),
+                    replies: []
+                };
+
+                // Save replies
+                card.querySelectorAll('.reply-card').forEach(replyCard => {
+                    discussion.replies.push({
+                        author: replyCard.querySelector('.reply-author').innerHTML,
+                        content: replyCard.querySelector('.reply-content').textContent,
+                        timestamp: replyCard.querySelector('.reply-time').textContent
+                    });
+                });
+
+                discussions.push(discussion);
+            });
+
+            localStorage.setItem('forumDiscussions', JSON.stringify(discussions));
+        }
+
+        function createDiscussionCard(discussion) {
+            const discussionCard = document.createElement('div');
+            const author = discussion.author.includes('Anonymous') ? 'anonymous' : discussion.author.split('•')[0].trim();
+            const isCurrentUser = author === currentUser;
+            
+            discussionCard.className = 'discussion-card';
+            discussionCard.innerHTML = `
+                <div class="discussion-header">
+                    <h3 class="discussion-title">${discussion.title}</h3>
+                    ${isCurrentUser ? `<button class="delete-btn" onclick="showDeleteConfirm(this, 'discussion')" title="Delete discussion" style="opacity: 1;"><span class="material-symbols-outlined">delete</span></button>` : ''}
+                </div>
+                <div class="discussion-meta" data-author="${author}">
+                    ${discussion.author}
+                </div>
+                <p class="discussion-content">${discussion.content}</p>
+                <div class="discussion-actions">
+                    <button class="action-btn" onclick="toggleReplyForm(this)">Reply</button>
+                    <button class="action-btn" onclick="toggleReplies(this)">Show Replies (${discussion.replies.length})</button>
+                </div>
+                <div class="replies-section" style="display: none;">
+                    <div class="reply-form">
+                        <textarea class="reply-input" placeholder="Write your reply..."></textarea>
+                        <button class="submit-btn" onclick="submitReply(this)">Post Reply</button>
+                    </div>
+                    <div class="replies-list">
+                        ${discussion.replies.map(reply => {
+                            const replyAuthor = reply.author.includes('Anonymous') ? 'anonymous' : reply.author.split('•')[0].trim();
+                            const isReplyFromCurrentUser = replyAuthor === currentUser;
+                            return `
+                                <div class="reply-card">
+                                    <div class="reply-header">
+                                        <span class="reply-author" data-author="${replyAuthor}">${reply.author}</span>
+                                        <span class="reply-time">${reply.timestamp}</span>
+                                        ${isReplyFromCurrentUser ? `<button class="delete-btn" onclick="showDeleteConfirm(this, 'reply')" title="Delete reply" style="opacity: 1;"><span class="material-symbols-outlined">delete</span></button>` : ''}
+                                    </div>
+                                    <p class="reply-content">${reply.content}</p>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+            return discussionCard;
+        }
+
+        function toggleDiscussionForm() {
+            const form = document.getElementById('discussionForm');
+            form.classList.toggle('active');
+        }
+
+        function toggleReplyForm(button) {
+            const discussionCard = button.closest('.discussion-card');
+            const replyForm = discussionCard.querySelector('.reply-form');
+            const repliesSection = discussionCard.querySelector('.replies-section');
+            const replyInput = discussionCard.querySelector('.reply-input');
+            const showRepliesBtn = discussionCard.querySelector('.action-btn:last-child');
+            
+            if (repliesSection.style.display === 'none') {
+                repliesSection.style.display = 'block';
+                const replyCount = discussionCard.querySelector('.replies-list').children.length;
+                showRepliesBtn.textContent = `Hide Replies (${replyCount})`;
+            }
+            
+            replyForm.classList.add('active');
+            replyInput.focus();
+        }
+
+        function toggleReplies(button) {
+            const discussionCard = button.closest('.discussion-card');
+            const repliesSection = discussionCard.querySelector('.replies-section');
+            const repliesList = discussionCard.querySelector('.replies-list');
+            const replyCount = repliesList.children.length;
+            const isHidden = repliesSection.style.display === 'none';
+            
+            repliesSection.style.display = isHidden ? 'block' : 'none';
+            button.textContent = isHidden ? `Hide Replies (${replyCount})` : `Show Replies (${replyCount})`;
+            
+            if (!isHidden) {
+                const replyForm = discussionCard.querySelector('.reply-form');
+                replyForm.classList.remove('active');
+            }
+        }
+
+        function submitReply(button) {
+            const discussionCard = button.closest('.discussion-card');
+            const replyInput = discussionCard.querySelector('.reply-input');
+            const repliesList = discussionCard.querySelector('.replies-list');
+            const showRepliesBtn = discussionCard.querySelector('.action-btn:last-child');
+            
+            if (replyInput.value.trim() === '') return;
+
+            const replyCard = document.createElement('div');
+            replyCard.className = 'reply-card';
+            replyCard.innerHTML = `
+                <div class="reply-header">
+                    <span class="reply-author" data-author="${currentUser}"><span class="anonymous-badge">Anonymous</span></span>
+                    <span class="reply-time">Just now</span>
+                    <button class="delete-btn" onclick="showDeleteConfirm(this, 'reply')" title="Delete reply" style="opacity: 1;"><span class="material-symbols-outlined">delete</span></button>
+                </div>
+                <p class="reply-content">${replyInput.value}</p>
+            `;
+
+            repliesList.prepend(replyCard);
+            replyInput.value = '';
+            button.closest('.reply-form').classList.remove('active');
+
+            const replyCount = repliesList.children.length;
+            showRepliesBtn.textContent = `Hide Replies (${replyCount})`;
+
+            saveDiscussions();
+        }
+
+        function createDiscussion(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            const isAnonymous = document.getElementById('anonymous').checked;
+
+            const discussionCard = document.createElement('div');
+            discussionCard.className = 'discussion-card';
+            discussionCard.innerHTML = `
+                <div class="discussion-header">
+                    <h3 class="discussion-title">${title}</h3>
+                    <button class="delete-btn" onclick="showDeleteConfirm(this, 'discussion')" title="Delete discussion" style="opacity: 1;"><span class="material-symbols-outlined">delete</span></button>
+                </div>
+                <div class="discussion-meta" data-author="${currentUser}">
+                    Posted by ${isAnonymous ? '<span class="anonymous-badge">Anonymous</span>' : currentUser} • Just now
+                </div>
+                <p class="discussion-content">${content}</p>
+                <div class="discussion-actions">
+                    <button class="action-btn" onclick="toggleReplyForm(this)">Reply</button>
+                    <button class="action-btn" onclick="toggleReplies(this)">Show Replies (0)</button>
+                </div>
+                <div class="replies-section" style="display: none;">
+                    <div class="reply-form">
+                        <textarea class="reply-input" placeholder="Write your reply..."></textarea>
+                        <button class="submit-btn" onclick="submitReply(this)">Post Reply</button>
+                    </div>
+                    <div class="replies-list"></div>
+                </div>
+            `;
+
+            document.getElementById('discussionsList').prepend(discussionCard);
+            document.getElementById('discussionForm').classList.remove('active');
+            event.target.reset();
+
+            saveDiscussions();
+        }
+
+        // Add search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const discussions = document.querySelectorAll('.discussion-card');
+
+            discussions.forEach(discussion => {
+                const title = discussion.querySelector('.discussion-title').textContent.toLowerCase();
+                const content = discussion.querySelector('.discussion-content').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                    discussion.style.display = 'block';
+                } else {
+                    discussion.style.display = 'none';
+                }
+            });
+        });
+
+        function showDeleteConfirm(button, type) {
+            const item = button.closest(type === 'discussion' ? '.discussion-card' : '.reply-card');
+            const authorElement = type === 'discussion' 
+                ? item.querySelector('.discussion-meta')
+                : item.querySelector('.reply-author');
+            
+            const author = authorElement.getAttribute('data-author');
+            const isAnonymous = authorElement.innerHTML.includes('Anonymous');
+            
+            // Only allow deletion if the user is the author
+            if (author !== currentUser) {
+                alert('You can only delete your own posts.');
+                return;
+            }
+
+            currentDeleteItem = item;
+            currentDeleteType = type;
+            
+            document.getElementById('overlay').classList.add('active');
+            document.getElementById('deleteConfirm').classList.add('active');
+        }
+
+        function cancelDelete() {
+            document.getElementById('overlay').classList.remove('active');
+            document.getElementById('deleteConfirm').classList.remove('active');
+            currentDeleteItem = null;
+            currentDeleteType = null;
+        }
+
+        function confirmDelete() {
+            if (currentDeleteItem && currentDeleteType) {
+                if (currentDeleteType === 'reply') {
+                    // Update reply count
+                    const discussionCard = currentDeleteItem.closest('.discussion-card');
+                    const repliesList = discussionCard.querySelector('.replies-list');
+                    const showRepliesBtn = discussionCard.querySelector('.action-btn:last-child');
+                    const replyCount = repliesList.children.length - 1;
+                    showRepliesBtn.textContent = `Show Replies (${replyCount})`;
+                }
+                
+                currentDeleteItem.remove();
+                saveDiscussions();
+            }
+            
+            cancelDelete();
+        }
+
+        function clearForumHistory() {
+            if (confirm('Are you sure you want to clear all forum history? This action cannot be undone.')) {
+                localStorage.removeItem('forumDiscussions');
+                document.getElementById('discussionsList').innerHTML = `
+                    <div class="discussion-card">
+                        <div class="discussion-header">
+                            <h3 class="discussion-title">Welcome to the Mental Help Forum!</h3>
+                        </div>
+                        <div class="discussion-meta">
+                            Posted by <span class="anonymous-badge">Anonymous</span> • Just now
+                        </div>
+                        <p class="discussion-content">
+                            In this space, you can freely express yourself without any judgement. Post discussions anonymously, and get advice from peers your age. Please keep all discussions respectful and appropriate. Moderators frequently check the forum for any violations and reserve the right to remove any content.
+                        </p>
+                        <div class="discussion-actions">
+                            <button class="action-btn" onclick="toggleReplyForm(this)">Reply</button>
+                            <button class="action-btn" onclick="toggleReplies(this)">Show Replies (0)</button>
+                        </div>
+                        <div class="replies-section" style="display: none;">
+                            <div class="reply-form">
+                                <textarea class="reply-input" placeholder="Write your reply..."></textarea>
+                                <button class="submit-btn" onclick="submitReply(this)">Post Reply</button>
+                            </div>
+                            <div class="replies-list"></div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

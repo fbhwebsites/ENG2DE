@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Resources</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        body {
+            color: #222;
+            min-height: 100vh;
+            transition: background 0.5s;
+        }
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 40px 0 40px;
+            box-sizing: border-box;
+            background: #ffffff;
+        }
+        .logo {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            font-weight: 400;
+            color: #000000;
+        }
+        nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        nav a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #666666;
+        }
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+            height: 100%;
+        }
+        .more-link {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+        }
+        .dropdown-arrow {
+            font-size: 0.8em;
+            margin-left: 6px;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            left: auto;
+            top: 100%;
+            min-width: 160px;
+            background: #ffffff;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            z-index: 10;
+            flex-direction: column;
+            padding: 10px 0;
+            pointer-events: auto;
+            border: 1px solid #e0e0e0;
+        }
+        .dropdown-content a {
+            color: #000000;
+            padding: 12px 24px;
+            text-decoration: none;
+            display: block;
+            font-size: 1.1rem;
+            transition: background 0.2s, color 0.2s;
+            border-radius: 6px;
+        }
+        .dropdown-content a:hover {
+            background: #f5f5f5;
+            color: #000000;
+        }
+        .nav-dropdown:hover .dropdown-content,
+        .nav-dropdown:focus-within .dropdown-content {
+            display: flex;
+        }
+        .nav-dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .quick-help {
+            background: linear-gradient(90deg, #ffe3e3 0%, #fffbe7 100%);
+            border-left: 8px solid #ff6f61;
+            border-radius: 18px;
+            padding: 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 6px 32px rgba(255, 111, 97, 0.08);
+        }
+        .quick-help .material-symbols-outlined {
+            color: #ff6f61;
+            font-size: 3rem;
+            filter: drop-shadow(0 2px 8px #ffbdbd);
+        }
+        .quick-help-content {
+            flex: 1;
+        }
+        .quick-help-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ff6f61;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.5px;
+        }
+        .quick-help-desc {
+            color: #b71c1c;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+        .resource-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .resource-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 22px;
+            box-shadow: 0 6px 32px rgba(25, 118, 210, 0.08), 0 1.5px 8px rgba(0,0,0,0.03);
+            padding: 2.2rem 1.7rem 1.7rem 1.7rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: box-shadow 0.25s, transform 0.25s;
+            border: none;
+            position: relative;
+        }
+        .resource-card:hover {
+            box-shadow: 0 12px 40px rgba(25, 118, 210, 0.13), 0 2px 12px rgba(0,0,0,0.06);
+            transform: translateY(-6px) scale(1.025);
+            z-index: 2;
+        }
+        .resource-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.1rem;
+            color: #5c6bc0;
+            background: linear-gradient(135deg, #e3f0ff 0%, #f9e7ff 100%);
+            border-radius: 50%;
+            padding: 0.5rem;
+            box-shadow: 0 2px 8px #e3f0ff;
+        }
+        .resource-title {
+            font-size: 1.18rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1976d2;
+            letter-spacing: 0.2px;
+        }
+        .resource-desc {
+            color: #444;
+            font-size: 1.04rem;
+            margin-bottom: 1.1rem;
+            font-weight: 500;
+        }
+        .resource-access {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 0.2rem;
+            font-weight: 500;
+        }
+        .resource-link {
+            color: #1976d2;
+            text-decoration: underline;
+            font-size: 1rem;
+            margin-top: 0.2rem;
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .quick-help {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">MENTAL HELP</div>
+        <nav>
+            <a href="english_summative.html">Home</a>
+            <a href="forum.html">Forum</a>
+            <a href="goals.html">Goals</a>
+            <a href="journal.html">Journal</a>
+            <div class="nav-dropdown">
+                <a href="#" class="more-link">More <span class="dropdown-arrow">&#9662;</span></a>
+                <div class="dropdown-content">
+                    <a href="importance.html">Importance</a>
+                    <a href="resource.html">Resources</a>
+                    <a href="affirmations.html">Affirmations</a>
+
+                    <a href="bulletin.html">Bulletin</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="quick-help">
+            <span class="material-symbols-outlined">support_agent</span>
+            <div class="quick-help-content">
+                <div class="quick-help-title">Need Help Now?</div>
+                <div class="quick-help-desc">
+                    If you or someone you know is in crisis, call <b>9-8-8</b> (Canada Suicide Crisis Helpline) or <b>9-1-1</b> for immediate help. Please reach out to a trusted adult, you are not alone.<br>
+                </div>
+            </div>
+        </div>
+        <div class="resource-cards">
+            <div class="resource-card">
+                <span class="material-symbols-outlined resource-icon">call</span>
+                <div class="resource-title">Kids Help Phone</div>
+                <div class="resource-desc">24/7 free, confidential support for youth in Canada. Talk to trained professionals and get help for anything big or small.</div>
+                <div class="resource-access">Call: <b>1-800-668-6868</b></div>
+                <div class="resource-access">Text: <b>CONNECT</b> to <b>686868</b></div>
+                <a class="resource-link" href="https://kidshelpphone.ca/" target="_blank">Visit Website</a>
+            </div>
+            <div class="resource-card">
+                <span class="material-symbols-outlined resource-icon">sms</span>
+                <div class="resource-title">Ottawa Centre for Resilience</div>
+                <div class="resource-desc">A compilation of resources made specially for youth. Includes a list of crisis lines and support, information about mental health, and helpful apps.</div>
+                <a class="resource-link" href="https://ocfr.ca/resources/for-youth/" target="_blank">Visit Website</a>
+            </div>
+            <div class="resource-card">
+                <span class="material-symbols-outlined resource-icon">diversity_3</span>
+                <div class="resource-title">LGBT YouthLine</div>
+                <div class="resource-desc">Peer support for 2SLGBTQ+ youth in Ontario. Chat, text, or call to connect with someone who understands.</div>
+                <div class="resource-access">Text: <b>647-694-4275</b></div>
+                <div class="resource-access">Call: <b>1-800-268-9688</b></div>
+                <a class="resource-link" href="https://www.youthline.ca/" target="_blank">Visit Website</a>
+            </div>
+            <div class="resource-card">
+                <span class="material-symbols-outlined resource-icon">psychology</span>
+                <div class="resource-title">One Stop Talk</div>
+                <div class="resource-desc">Free confidential services for youth and parents with struggling youth in Ontario. Get connected with a registered therapist </div>
+                <div class="resource-access">Online: 24/7 chat & resources</div>
+                <a class="resource-link" href="https://onestoptalk.ca/" target="_blank">Visit Website</a>
+            </div>
+            <div class="resource-card">
+                <span class="material-symbols-outlined resource-icon">school</span>
+                <div class="resource-title">School Counsellors</div>
+                <div class="resource-desc">Most schools have counsellors who can help with stress, anxiety, bullying, and more. They're professionals trained to listen and support you unconditionally.</div>
+                <div class="resource-access">Book a meeting with your school counsellor today on your school's website.</div>
+            </div>
+            <div class="resource-card">
+                <span class="material-symbols-outlined resource-icon">groups</span>
+                <div class="resource-title">Local Youth Groups</div>
+                <div class="resource-desc">Community youth groups offer a safe space to talk, make friends, and get support. Many offer mental health programs and activities.</div>
+                <div class="resource-access">Search online or ask at your local community centre.</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

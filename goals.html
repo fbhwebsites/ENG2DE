@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Goals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+
+        body {
+            background: #ffffff;
+            color: #000000;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 40px 0 40px;
+            box-sizing: border-box;
+            background: #ffffff;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            font-weight: 400;
+            color: #000000;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #666666;
+        }
+
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+            height: 100%;
+        }
+
+        .more-link {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8em;
+            margin-left: 6px;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            left: auto;
+            top: 100%;
+            min-width: 160px;
+            background: #ffffff;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            z-index: 10;
+            flex-direction: column;
+            padding: 10px 0;
+            pointer-events: auto;
+            border: 1px solid #e0e0e0;
+        }
+
+        .dropdown-content a {
+            color: #000000;
+            padding: 12px 24px;
+            text-decoration: none;
+            display: block;
+            font-size: 1.1rem;
+            transition: background 0.2s, color 0.2s;
+            border-radius: 6px;
+        }
+
+        .dropdown-content a:hover {
+            background: #f5f5f5;
+            color: #000000;
+        }
+
+        .nav-dropdown:hover .dropdown-content,
+        .nav-dropdown:focus-within .dropdown-content {
+            display: flex;
+        }
+
+        .nav-dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .goals-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .goals-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+
+        .goals-header p {
+            color: #666666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .goal-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .category-card h3 {
+            margin-bottom: 0.5rem;
+            color: #000000;
+        }
+
+        .category-card p {
+            color: #666666;
+            font-size: 0.9rem;
+        }
+
+        .goal-form {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .goal-form.active {
+            display: block;
+        }
+
+        .goal-form h2 {
+            margin-bottom: 2.5rem;
+            color: #000000;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #000000;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            background: #ffffff;
+            color: #000000;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #000000;
+            color: #ffffff;
+            border: 1px solid #000000;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .goals-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .goal-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .goal-title {
+            font-size: 1.2rem;
+            color: #000000;
+            margin: 0;
+        }
+
+        .goal-category {
+            background: #f5f5f5;
+            color: #666666;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .goal-description {
+            color: #666666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .goal-steps {
+            margin-bottom: 1rem;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #666666;
+        }
+
+        .step-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .step-checkbox.checked {
+            background: #000000;
+            border-color: #000000;
+            color: #ffffff;
+        }
+
+        .goal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #666666;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .action-btn:hover {
+            color: #000000;
+        }
+
+        .create-goal {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .create-goal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #f5f5f5;
+            border-radius: 2px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #000000;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .create-goal {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">MENTAL HELP</div>
+        <nav>
+            <a href="english_summative.html">Home</a>
+            <a href="forum.html">Forum</a>
+            <a href="goals.html">Goals</a>
+            <a href="journal.html">Journal</a>
+            <div class="nav-dropdown">
+                <a href="#" class="more-link">More <span class="dropdown-arrow">&#9662;</span></a>
+                <div class="dropdown-content">
+                    <a href="importance.html">Importance</a>
+                    <a href="resource.html">Resources</a>
+                    <a href="affirmations.html">Affirmations</a>
+                    <a href="bulletin.html">Bulletin</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div id="encouragementBox" style="display:none;position:fixed;top:100px;right:40px;z-index:1000;background:#e0ffe0;color:#1a7f1a;padding:1.5rem 2.5rem;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.08);font-size:1.2rem;font-weight:500;transition:all 0.3s;"></div>
+        <div class="goals-header">
+            <h1>Set Your Goals</h1>
+            <p>Track your progress and work towards your goals.</p>
+        </div>
+
+        <div class="goal-categories">
+            <div class="category-card" onclick="selectCategory('physical')">
+                <h3>Physical Health</h3>
+                <p>Goals for physical fitness and overall health</p>
+            </div>
+            <div class="category-card" onclick="selectCategory('social')">
+                <h3>Social</h3>
+                <p>Goals for relationships and social interactions</p>
+            </div>
+            <div class="category-card" onclick="selectCategory('personal')">
+                <h3>Personal Growth</h3>
+                <p>Goals for self-improvement and development</p>
+            </div>
+        </div>
+
+        <div class="goal-form" id="goalForm">
+            <h2 style="position: relative;">Create New Goal
+                <button type="button" onclick="closeGoalForm()" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 2rem; color: #888; cursor: pointer; line-height: 1; padding: 0 10px;">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </h2>
+            <form onsubmit="createGoal(event)">
+                <div class="form-group">
+                    <label for="title">Goal Title</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" required>
+                        <option value="physical">Physical Health</option>
+                        <option value="social">Social</option>
+                        <option value="personal">Personal Growth</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="steps">Action Steps (one per line)</label>
+                    <textarea id="steps" required placeholder="Enter each step on a new line"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Create Goal</button>
+            </form>
+        </div>
+
+        <div class="goals-list" id="goalsList">
+            <!-- Sample goal -->
+            <div class="goal-card">
+                <div class="goal-header">
+                    <h3 class="goal-title">Practice Daily Meditation</h3>
+                    <span class="goal-category">Mental Health</span>
+                </div>
+                <p class="goal-description">Develop a consistent meditation practice to improve mental clarity and reduce stress.</p>
+                <div class="goal-steps">
+                    <div class="step-item">
+                        <div class="step-checkbox" onclick="toggleStep(this)">
+                            <span class="material-symbols-outlined">check</span>
+                        </div>
+                        <span>Start with 5 minutes daily</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-checkbox" onclick="toggleStep(this)">
+                            <span class="material-symbols-outlined">check</span>
+                        </div>
+                        <span>Gradually increase to 15 minutes</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-checkbox" onclick="toggleStep(this)">
+                            <span class="material-symbols-outlined">check</span>
+                        </div>
+                        <span>Try different meditation techniques</span>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 33%"></div>
+                </div>
+                <div class="goal-actions">
+                    <button class="action-btn" onclick="editGoal(this)">
+                        <span class="material-symbols-outlined">edit</span>
+                        Edit
+                    </button>
+                    <button class="action-btn" onclick="deleteGoal(this)">
+                        <span class="material-symbols-outlined">delete</span>
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="create-goal" onclick="toggleGoalForm()">
+        <span class="material-symbols-outlined">add</span>
+        New Goal
+    </button>
+
+    <script>
+        let currentCategory = null;
+
+        function selectCategory(category) {
+            currentCategory = category;
+            document.getElementById('category').value = category;
+            document.getElementById('goalForm').classList.add('active');
+            document.getElementById('goalForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleGoalForm() {
+            const form = document.getElementById('goalForm');
+            form.classList.toggle('active');
+            if (form.classList.contains('active')) {
+                form.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function closeGoalForm() {
+            document.getElementById('goalForm').classList.remove('active');
+        }
+
+        function createGoal(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const category = document.getElementById('category').value;
+            const description = document.getElementById('description').value;
+            const steps = document.getElementById('steps').value.split('\n').filter(step => step.trim() !== '');
+
+            const goalCard = document.createElement('div');
+            goalCard.className = 'goal-card';
+            goalCard.innerHTML = `
+                <div class="goal-header">
+                    <h3 class="goal-title">${title}</h3>
+                    <span class="goal-category">${getCategoryName(category)}</span>
+                </div>
+                <p class="goal-description">${description}</p>
+                <div class="goal-steps">
+                    ${steps.map(step => `
+                        <div class="step-item">
+                            <div class="step-checkbox" onclick="toggleStep(this)">
+                                <span class="material-symbols-outlined">check</span>
+                            </div>
+                            <span class="step-text">${step}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="goal-actions">
+                    <button class="action-btn" onclick="editGoal(this)">
+                        <span class="material-symbols-outlined">edit</span>
+                        Edit
+                    </button>
+                    <button class="action-btn" onclick="deleteGoal(this)">
+                        <span class="material-symbols-outlined">delete</span>
+                        Delete
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('goalsList').prepend(goalCard);
+            document.getElementById('goalForm').classList.remove('active');
+            event.target.reset();
+
+            saveGoals();
+        }
+
+        function getCategoryName(category) {
+            const categories = {
+                'physical': 'Physical Health',
+                'social': 'Social',
+                'personal': 'Personal Growth'
+            };
+            return categories[category] || category;
+        }
+
+        function toggleStep(checkbox) {
+            checkbox.classList.toggle('checked');
+            updateProgress(checkbox.closest('.goal-card'));
+            saveGoals();
+        }
+
+        function updateProgress(goalCard) {
+            const steps = goalCard.querySelectorAll('.step-checkbox');
+            const checkedSteps = goalCard.querySelectorAll('.step-checkbox.checked');
+            const progress = (checkedSteps.length / steps.length) * 100;
+            goalCard.querySelector('.progress-fill').style.width = `${progress}%`;
+            if (progress === 100) {
+                setTimeout(() => {
+                    goalCard.remove();
+                    saveGoals();
+                    showEncouragement();
+                }, 500); // Small delay for user to see the full bar
+            }
+        }
+
+        // Encouragement message
+        function showEncouragement() {
+            const encouragement = document.getElementById('encouragementBox');
+            encouragement.style.display = 'block';
+            encouragement.innerHTML = getRandomEncouragement();
+            setTimeout(() => {
+                encouragement.style.display = 'none';
+            }, 4000);
+        }
+
+        function getRandomEncouragement() {
+            const messages = [
+                "You're doing great!",
+                "Keep it up!",
+                "Another one down!",
+                "You crushed it!",
+            ];
+            return messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        function editGoal(button) {
+            const goalCard = button.closest('.goal-card');
+            const title = goalCard.querySelector('.goal-title').textContent;
+            const category = goalCard.querySelector('.goal-category').textContent;
+            const description = goalCard.querySelector('.goal-description').textContent;
+            const steps = Array.from(goalCard.querySelectorAll('.step-item')).map(item => {
+                const stepText = item.querySelector('.step-text').textContent;
+                return stepText;
+            });
+
+            document.getElementById('title').value = title;
+            document.getElementById('category').value = category.toLowerCase().replace(' ', '_');
+            document.getElementById('description').value = description;
+            document.getElementById('steps').value = steps.join('\n');
+
+            goalCard.remove();
+            document.getElementById('goalForm').classList.add('active');
+            document.getElementById('goalForm').scrollIntoView({ behavior: 'smooth' });
+
+            saveGoals();
+        }
+
+        function deleteGoal(button) {
+            if (confirm('Are you sure you want to delete this goal?')) {
+                button.closest('.goal-card').remove();
+                saveGoals();
+            }
+        }
+
+        function saveGoals() {
+            const goals = [];
+            document.querySelectorAll('.goal-card').forEach(card => {
+                const goal = {
+                    title: card.querySelector('.goal-title').textContent,
+                    category: card.querySelector('.goal-category').textContent,
+                    description: card.querySelector('.goal-description').textContent,
+                    steps: Array.from(card.querySelectorAll('.step-item')).map(item => ({
+                        text: item.querySelector('.step-text').textContent,
+                        completed: item.querySelector('.step-checkbox').classList.contains('checked')
+                    }))
+                };
+                goals.push(goal);
+            });
+            localStorage.setItem('goals', JSON.stringify(goals));
+        }
+
+        function loadGoals() {
+            const savedGoals = localStorage.getItem('goals');
+            if (savedGoals) {
+                const goals = JSON.parse(savedGoals);
+                const goalsList = document.getElementById('goalsList');
+                goalsList.innerHTML = ''; // Clear default content
+                
+                goals.forEach(goal => {
+                    const goalCard = document.createElement('div');
+                    goalCard.className = 'goal-card';
+                    goalCard.innerHTML = `
+                        <div class="goal-header">
+                            <h3 class="goal-title">${goal.title}</h3>
+                            <span class="goal-category">${goal.category}</span>
+                        </div>
+                        <p class="goal-description">${goal.description}</p>
+                        <div class="goal-steps">
+                            ${goal.steps.map(step => `
+                                <div class="step-item">
+                                    <div class="step-checkbox ${step.completed ? 'checked' : ''}" onclick="toggleStep(this)">
+                                        <span class="material-symbols-outlined">check</span>
+                                    </div>
+                                    <span class="step-text">${step.text}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${(goal.steps.filter(step => step.completed).length / goal.steps.length) * 100}%"></div>
+                        </div>
+                        <div class="goal-actions">
+                            <button class="action-btn" onclick="editGoal(this)">
+                                <span class="material-symbols-outlined">edit</span>
+                                Edit
+                            </button>
+                            <button class="action-btn" onclick="deleteGoal(this)">
+                                <span class="material-symbols-outlined">delete</span>
+                                Delete
+                            </button>
+                        </div>
+                    `;
+                    goalsList.appendChild(goalCard);
+                });
+            }
+        }
+
+        // Load saved goals when page loads
+        document.addEventListener('DOMContentLoaded', loadGoals);
+    </script>
+</body>
+</html>
